@@ -3,25 +3,63 @@ package main
 import (
 	"fmt"
 	"gin-gorm-demo/database"
+	"io/ioutil"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"gopkg.in/yaml.v2"
 )
 
-//var database.MYSQLDB *gorm.DB
+type BuildConf struct {
+	Mysql struct {
+		Addr     string `yaml:"addr"`
+		Port     string `yaml:"port"`
+		Username string `yaml:"username"`
+		Password string `yaml:"password"`
+		Database string `yaml:"database"`
+	}
+	Listen string `yaml:"listen"`
+	Env    string `yaml:"env"`
+}
+
+func (o *BuildConf) getConf() *BuildConf {
+	yamlFile, err := ioutil.ReadFile("./build/dev.yaml")
+	//yamlFile, err := ioutil.ReadFile("./build/prod.yaml")
+	if err != nil {
+		fmt.Println("err", err)
+	}
+	err = yaml.Unmarshal(yamlFile, o)
+	if err != nil {
+		fmt.Println("err", err)
+	}
+	return o
+}
 
 func main() {
 	var err error
-	// gorm
-	database.MYSQLDB, err = gorm.Open("MYSQLDB", "root:123456@tcp(127.0.0.1:3306)/lpf?charset=utf8&parseTime=True&loc=Local")
+
+	var con BuildConf
+	con.getConf()
+
+	mysql_conf := con.Mysql
+	connect_sql := mysql_conf.Username + ":" + mysql_conf.Password + "@tcp(" + mysql_conf.Addr + ":" + mysql_conf.Port + ")/" + mysql_conf.Database + "?"
+	database.MYSQLDB, err = gorm.Open("mysql", connect_sql+"charset=utf8&parseTime=True&loc=Local")
 	database.MYSQLDB.SingularTable(true)
 	if err != nil {
 		fmt.Println("connection err")
 	} else {
-		fmt.Println("connection succedssed")
+		switch con.Env {
+		case "development":
+			fmt.Println("current environment is development")
+		case "production":
+			fmt.Println("current environment is production")
+		case "test":
+			fmt.Println("current environment is test")
+		}
 	}
 	defer database.MYSQLDB.Close()
-	// router
+
 	router := InitRouter()
-	router.Run("0.0.0.0:3000")
+	fmt.Println("con", con.Listen)
+	router.Run("0.0.0.0:" + con.Listen)
 }

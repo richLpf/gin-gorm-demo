@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"fmt"
+	"gin-gorm-demo/common"
 	"gin-gorm-demo/conf"
 	"gin-gorm-demo/database"
 	"net/http"
@@ -13,7 +15,7 @@ type ReqRegionInfo struct {
 	Query string   `json:"query"`
 	Value []string `json:"value"`
 }
-type ResRegionInfo struct {
+type Regions struct {
 	Id       int    `gorm:"AUTO_INCCREMENT,primary_key" json:"id"`
 	RegionCn string `json:"region_cn"`
 	RegionEn string `json:"region_en"`
@@ -25,14 +27,22 @@ type ResRegionInfo struct {
 }
 
 func GetRegionInfo(c *gin.Context) {
+	hastable := common.HasTable("regions")
+	if !hastable {
+		if err := database.MYSQLDB.Set("gorm:table_options", "ENGINE=InnoDB").CreateTable(&Regions{}).Error; err != nil {
+			c.JSON(http.StatusOK, gin.H{"RetCode": conf.Ret_Fail, "message": err})
+			return
+		}
+		fmt.Println("create databse ok")
+	}
 	var reqRegionInfo ReqRegionInfo
-	resRegionInfo := make([]ResRegionInfo, 0)
-	if err := c.ShouldBindJSON(&reqRegionInfo).Error; err != nil {
+	resRegionInfo := make([]Regions, 0)
+	if err := c.ShouldBindJSON(&reqRegionInfo); err != nil {
 		c.JSON(http.StatusOK, gin.H{"RetCode": conf.Ret_Fail, "message": err})
 		return
 	}
-	query := reqRegionInfo.Query + "IN (?)"
-	if err := database.MYSQLDB.Table("regions").Where(query, reqRegionInfo.Value).Find(&resRegionInfo).Error; err != nil {
+	query := reqRegionInfo.Query + " IN (?)"
+	if err := database.MYSQLDB.Debug().Table("regions").Where(query, reqRegionInfo.Value).Find(&resRegionInfo).Error; err != nil {
 		c.JSON(http.StatusOK, gin.H{"RetCode": conf.Ret_Fail, "message": err.Error()})
 		return
 	}
