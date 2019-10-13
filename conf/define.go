@@ -1,4 +1,4 @@
-package main
+package conf
 
 const (
 	Ret_OK         = int(0)

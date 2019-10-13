@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"gopkg.in/gomail.v2"
 	"net/http"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
+	"gopkg.in/gomail.v2"
 )
 
 type MailInfo struct {

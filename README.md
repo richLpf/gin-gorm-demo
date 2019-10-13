@@ -20,9 +20,22 @@
 
 ## 规划
 
-- 这个作为demo1分支
+- 这个作为demo分支
 
 - 之后慢慢规划
+
+# 目录结构
+
+- controller  控制器
+    - admin.go   登录控制
+    - passages.go  文章管理
+    - region.go    机房管理
+- database 数据库配置
+- models  模型，处理数据库逻辑
+- app.go  入口文件
+- databaseModel.go  数据库结构体
+- router.go  路由文件
+- email.go  发送邮件服务
 
 
 

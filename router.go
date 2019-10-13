@@ -2,26 +2,31 @@ package main
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
+	"gin-gorm-demo/controller"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 func InitRouter() *gin.Engine {
 	router := gin.Default()
 	router.Use(MiddlewareMongo())
-	router.Use(gin.Logger())
+	//router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 
 	web := router.Group("/web/passage")
-	web.GET("/list", GetPassageList)
-	web.POST("/add", AddPassage)
-	web.GET("/detail/:id", PassageDetail)
-	web.POST("/edit/:id", EditPassage)
-	web.POST("/del/:id", DelPassage)
+	web.GET("/list", controller.GetPassageList)
+	web.POST("/add", controller.AddPassage)
+	web.GET("/detail/:id", controller.PassageDetail)
+	web.POST("/edit/:id", controller.EditPassage)
+	web.POST("/del/:id", controller.DelPassage)
 
 	admin := router.Group("/web/admin")
-	admin.POST("/signup", SignUp)
-	admin.POST("/signin", SignIn)
+	admin.POST("/signup", controller.SignUp)
+	admin.POST("/signin", controller.SignIn)
+
+	api := router.Group("/v1")
+	api.GET("/region/list", controller.GetRegionInfo)
 
 	return router
 }
