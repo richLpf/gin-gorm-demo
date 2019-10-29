@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"gin-gorm-demo/database"
+	"gin-gorm-demo/models"
 	"io/ioutil"
 
 	"github.com/jinzhu/gorm"
@@ -58,6 +59,7 @@ func main() {
 		}
 	}
 	defer database.MYSQLDB.Close()
+	models.InitDB()
 
 	router := InitRouter()
 	fmt.Println("con", con.Listen)

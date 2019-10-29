@@ -1,13 +1,14 @@
 package models
 
 import (
+	"gin-gorm-demo/database"
 	"time"
 )
 
 type PublicModel struct {
 	CreatedAt time.Time `json:"created_at,omitempty"`
 	UpdatedAt time.Time `json:"updated_at,omitempty"`
-	deleted   int       `json:"deleted,omitempty"`
+	Deleted   int       `json:"deleted,omitempty"`
 }
 
 type Passages struct {
@@ -41,4 +42,22 @@ type LoginToken struct {
 	UpdatedAt time.Time `json:"updated_at,omitempty"`
 	ExpireAt  int64     `json:"expire_at"`
 	Valid     int       `json:"valid,omitempty"`
+}
+
+func InitDB() {
+	// init dbs
+	/*	Log.Info(address)
+		DB, err = gorm.Open("mysql", address)
+		if err != nil {
+			Log.Error("open mysql error(%v)", err)
+		}*/
+	database.MYSQLDB.Set("gorm:table_options", "ENGINE=InnoDB CHARSET=utf8").
+		AutoMigrate(
+			&Passages{},
+			&Users{},
+			&LoginToken{},
+		)
+	// DB.LogMode(true)
+	database.MYSQLDB.DB().Ping()
+	//Log.Info("connect to db %s", address)
 }
