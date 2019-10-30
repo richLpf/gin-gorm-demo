@@ -64,4 +64,5 @@ func main() {
 	router := InitRouter()
 	fmt.Println("con", con.Listen)
 	router.Run("0.0.0.0:" + con.Listen)
+	fmt.Println("con", con.Listen)
 }
