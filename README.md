@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: weilin
+ * @Date: 2019-11-07 22:45:46
+ * @LastEditors: weilin
+ * @LastEditTime: 2019-11-07 22:51:10
+ -->
 ## 项目简介
 
 技术栈： go  gin  gorm
@@ -59,5 +67,5 @@ api 透传，将要查找的数据，直接传递key,value  这样可以不需�
     + ufile的调用， 阿里云，腾讯云
 - 单元测试
 - k8s引入
-
+- 丰富使用场景
 
