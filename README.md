@@ -1,11 +1,4 @@
-<!--
- * @Descripttion: 
- * @version: 
- * @Author: weilin
- * @Date: 2019-11-07 22:45:46
- * @LastEditors: weilin
- * @LastEditTime: 2019-11-07 22:51:10
- -->
+
 ## 项目简介
 
 技术栈： go  gin  gorm
