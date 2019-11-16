@@ -1,7 +1,11 @@
 
 ## 项目简介
 
-技术栈： go  gin  gorm
+技术栈： `golang`  `gin`  `gorm` `mysql`  
+
+`restful api`  通过gin-swagger插件，编写swagger格式注释，生成restful风格api
+
+
 
 ## 项目完成功能
 
@@ -91,3 +95,14 @@ api 透传，将要查找的数据，直接传递key,value  这样可以不需�
 > 怎么定义sql变量，可以全局引用
 
 > golang的包是怎么引用的？
+
+
+## 参考资料
+
+> swagger 使用
+https://ieevee.com/tech/2018/04/19/go-swag.html
+
+https://github.com/teambition/swaggo/wiki/Declarative-Comments-Format
+
+> gorm文档
+http://gorm.book.jasperxu.com
