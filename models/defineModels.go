@@ -13,8 +13,8 @@ import (
 * 使用gorm来自定字段属性
  */
 type Model struct {
-	ID        uint       `gorm:"primary_key;AUTO_INCREMENT" json:"id"` // primary_key定义主键   AUTO_INCREMENT定义自增
-	CreatedAt time.Time  `json:"created_at,omitempty"`                 //omitempty 前端可以不用传入该字段，自动生成默认值，返回值如果为空，则不会返回该字段。
+	ID        uint       `gorm:"primary_key;AUTO_INCREMENT" json:"id,omitempty"` // primary_key定义主键   AUTO_INCREMENT定义自增
+	CreatedAt time.Time  `json:"created_at,omitempty"`                           //omitempty 前端可以不用传入该字段，自动生成默认值，返回值如果为空，则不会返回该字段。
 	UpdatedAt time.Time  `json:"updated_at,omitempty"`
 	DeletedAt *time.Time `json:"deleted_at,omitempty"`
 }
