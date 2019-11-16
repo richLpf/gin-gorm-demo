@@ -1,8 +1,8 @@
 env: development
 mysql:
-  addr: localhost
+  addr: "106.75.167.118"
   port: "3306"
   username: root
   password: "123456"
   database: web
-listen: "3000"
+listen: "9000"
