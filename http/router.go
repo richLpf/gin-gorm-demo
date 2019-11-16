@@ -1,4 +1,4 @@
-package main
+package http
 
 import (
 	"fmt"
@@ -7,7 +7,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 )
-
 
 func InitRouter() *gin.Engine {
 	router := gin.Default()

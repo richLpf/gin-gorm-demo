@@ -72,3 +72,14 @@ type ResponseInfo struct {
 func (LoginRecord) TableName() string {
 	return "LoginLogs"
 }
+
+/*登录记录*/
+type LoginToken struct {
+	Id        int       `json:"id,omitempty"`
+	Username  string    `json:"username"`
+	Token     string    `json:"token"`
+	CreatedAt time.Time `json:"created_at,omitempty"`
+	UpdatedAt time.Time `json:"updated_at,omitempty"`
+	ExpireAt  int64     `json:"expire_at"`
+	Valid     int       `json:"valid,omitempty"`
+}

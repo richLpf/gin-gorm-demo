@@ -3,7 +3,7 @@ package controller
 import (
 	"fmt"
 	"gin-gorm-demo/conf"
-	"gin-gorm-demo/database"
+	DB "gin-gorm-demo/database"
 	"gin-gorm-demo/models"
 	"net/http"
 
@@ -20,7 +20,7 @@ func GetPassageList(c *gin.Context) {
 	}*/
 	// 增加分页
 	passage_list := make([]models.Passages, 0)
-	if err := database.MYSQLDB.Where("is_deleted = ?", 0).Find(&passage_list).Error; err != nil {
+	if err := DB.MYSQLDB.Find(&passage_list).Error; err != nil {
 		c.JSON(http.StatusOK, gin.H{"code": conf.Ret_Fail, "message": err})
 		return
 	}
@@ -31,7 +31,7 @@ func AddPassage(c *gin.Context) {
 	var passage models.Passages
 	c.BindJSON(&passage)
 	// 需要验证下标题是否存在
-	if err := database.MYSQLDB.Create(&passage).Error; err != nil {
+	if err := DB.MYSQLDB.Create(&passage).Error; err != nil {
 		c.JSON(http.StatusOK, gin.H{"code": conf.Ret_Fail, "message": err.Error()})
 		return
 	}
@@ -46,7 +46,7 @@ func EditPassage(c *gin.Context) {
 func PassageDetail(c *gin.Context) {
 	id := c.Param("id")
 	var passage models.Passages
-	if err := database.MYSQLDB.Where("id = ?", id).Find(&passage).Error; err != nil {
+	if err := DB.MYSQLDB.Where("id = ?", id).Find(&passage).Error; err != nil {
 		c.JSON(http.StatusOK, gin.H{"code": conf.Ret_Fail, "message": err.Error()})
 		return
 	}
@@ -54,7 +54,7 @@ func PassageDetail(c *gin.Context) {
 }
 func DelPassage(c *gin.Context) {
 	id := c.Param("id")
-	if err := database.MYSQLDB.Exec("UPDATE passages SET is_deleted = 1 WHERE id IN (?)", id).Error; err != nil {
+	if err := DB.MYSQLDB.Exec("UPDATE passages WHERE id IN (?)", id).Error; err != nil {
 		c.JSON(http.StatusOK, gin.H{"code": conf.Ret_Fail, "message": err.Error()})
 		return
 	}
