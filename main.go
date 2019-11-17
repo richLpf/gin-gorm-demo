@@ -6,6 +6,16 @@ import (
 	"gin-gorm-demo/models"
 )
 
+// @title Swagger Example API
+// @version 1.0
+// @description This is a sample server Petstore server.
+
+// @contact.name API Support
+// @contact.url http://www.swagger.io/support
+// @contact.email support@swagger.io
+
+// @host petstore.swagger.io
+// @BasePath /web/passage
 func main() {
 	// 数据库初始化
 	database.InitMysql()

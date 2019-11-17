@@ -5,11 +5,19 @@ import (
 	"gin-gorm-demo/controller"
 	"net/http"
 
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+
+	_ "gin-gorm-demo/docs"
+
 	"github.com/gin-gonic/gin"
 )
 
 func InitRouter() *gin.Engine {
 	router := gin.Default()
+
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
 	router.Use(MiddlewareMongo())
 	//router.Use(gin.Logger())
 	router.Use(gin.Recovery())

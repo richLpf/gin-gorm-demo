@@ -1,0 +1,129 @@
+definitions:
+  models.Passages:
+    properties:
+      author:
+        type: string
+      category:
+        description: 默认长度为255
+        type: string
+      content:
+        description: 如果content字段为空或默认值，将不会返回改数据
+        type: string
+      created_at:
+        description: omitempty 前端可以不用传入该字段，自动生成默认值，返回值如果为空，则不会返回该字段。
+        type: string
+      deleted_at:
+        type: string
+      description:
+        type: string
+      id:
+        description: primary_key定义主键   AUTO_INCREMENT定义自增
+        type: integer
+      img_link:
+        description: 忽略这个字段
+        type: string
+      look:
+        description: 如果look_num的值为0  则不会返回该字段
+        type: integer
+      tag:
+        description: 类型为varchar  最大100 列名为 `tag`
+        type: string
+      title:
+        description: 不为空，且唯一
+        type: string
+      updated_at:
+        type: string
+    type: object
+info:
+  contact: {}
+  license: {}
+paths:
+  /web/passage/add:
+    post:
+      consumes:
+      - application/json
+      description: 添加文章接口
+      parameters:
+      - description: 文章标题
+        in: body
+        name: title
+        required: true
+        schema:
+          type: string
+      - description: 作者
+        in: body
+        name: author
+        required: true
+        schema:
+          type: string
+      - description: 标签
+        in: body
+        name: tag
+        required: true
+        schema:
+          type: string
+      - description: 点击数量
+        in: body
+        name: look
+        required: true
+        schema:
+          type: integer
+      - description: 类别
+        in: body
+        name: category
+        required: true
+        schema:
+          type: string
+      - description: 描述
+        in: body
+        name: description
+        required: true
+        schema:
+          type: string
+      - description: 内容
+        in: body
+        name: content
+        required: true
+        schema:
+          type: string
+      - description: 图片连接
+        in: body
+        name: img_link
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Passages'
+      summary: 添加文章
+      tags:
+      - 类别
+  /web/passage/list:
+    get:
+      consumes:
+      - application/json
+      description: 描述信息
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: string
+      - description: Offset
+        in: query
+        name: offset
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 文章列表
+      tags:
+      - 类别
+swagger: "2.0"

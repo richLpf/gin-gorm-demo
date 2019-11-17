@@ -100,9 +100,13 @@ api 透传，将要查找的数据，直接传递key,value  这样可以不需�
 ## 参考资料
 
 > swagger 使用
+
+https://github.com/swaggo/swag
+
+https://github.com/swaggo/gin-swagger
+
 https://ieevee.com/tech/2018/04/19/go-swag.html
 
-https://github.com/teambition/swaggo/wiki/Declarative-Comments-Format
 
 > gorm文档
 http://gorm.book.jasperxu.com

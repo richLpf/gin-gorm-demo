@@ -2,8 +2,6 @@ package models
 
 import (
 	"time"
-
-	"github.com/jinzhu/gorm"
 )
 
 // 定义不同的模型
@@ -26,7 +24,7 @@ type ResponseModel struct {
 
 /*文章表结构*/
 type Passages struct {
-	gorm.Model         // 引用Model公共模型，使passages表中有ID CreatedAt  UpdatedAt  DeletedAt  字段， 不用重复写入
+	Model              // 引用Model公共模型，使passages表中有ID CreatedAt  UpdatedAt  DeletedAt  字段， 不用重复写入
 	Title       string `gorm:"not null;unique;" json:"title"` // 不为空，且唯一
 	Author      string `json:"author"`
 	Category    string `gorm:"size:255" json:"category"`            // 默认长度为255
@@ -43,7 +41,6 @@ type Passages struct {
 * column 重新定义列的名字，如果像定义大写的列名字，经常用到
  */
 type Users struct {
-	gorm.Model
 	Sex      int    // 列名为 `sex`  json仅仅为返回数据  可以不写默认返回大写字段可以不写
 	Username string `json:"nick_name"` // 列名为 username
 	Password string // 列名为password
