@@ -23,6 +23,11 @@
 ### golang api定义
 
 
+### 发送邮件服务
+
+- common.go
+
+
 
 
 ## api接口开发模板

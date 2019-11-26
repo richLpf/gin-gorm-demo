@@ -5,4 +5,4 @@ mysql:
   username: root
   password: "123456"
   database: web
-listen: "3000"
+listen: "9001"

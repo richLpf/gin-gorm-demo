@@ -1,6 +1,6 @@
 env: development
 mysql:
-  addr: "106.75.167.118"
+  addr: "106.75.167.11"
   port: "3306"
   username: root
   password: "123456"

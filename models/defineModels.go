@@ -44,10 +44,10 @@ type Users struct {
 	Sex      int    // 列名为 `sex`  json仅仅为返回数据  可以不写默认返回大写字段可以不写
 	Username string `json:"nick_name"` // 列名为 username
 	Password string // 列名为password
-	Remark   string `json:"description"`        // 列名为remark, json:"description" 为读取表数据后返回的字段写法
-	Mail     string `gorm:"column:Mail"`        // 重新定义列名，Mail字段在表中的列名字 为Mail  大写的啊
-	Phone    string `gorm:"column:MobilePhone"` // 该列的名字为 MobilePhone
-	MoneyNum int    `gorm:"money_num"`          // 列名字为money_num
+	Remark   string `gorm:"default:'默认值'" json:"description"` // 列名为remark, json:"description" 为读取表数据后返回的字段写法，定义默认值
+	Mail     string `gorm:"column:Mail"`                      // 重新定义列名，Mail字段在表中的列名字 为Mail  大写的啊
+	Phone    string `gorm:"column:MobilePhone"`               // 该列的名字为 MobilePhone
+	MoneyNum int    `gorm:"money_num"`                        // 列名字为money_num
 }
 
 // 默认主键,更改表名

@@ -11,6 +11,7 @@ import (
 	_ "gin-gorm-demo/docs"
 
 	"github.com/gin-gonic/gin"
+	"gin-gorm-demo/common"
 )
 
 func InitRouter() *gin.Engine {
@@ -32,6 +33,9 @@ func InitRouter() *gin.Engine {
 	admin := router.Group("/web/admin")
 	admin.POST("/signup", controller.SignUp)
 	admin.POST("/signin", controller.SignIn)
+
+	public := router.Group("/public")
+	public.POST("/send", common.SendToMails)
 
 	api := router.Group("/v1")
 	api.GET("/region/list", controller.GetRegionInfo)
