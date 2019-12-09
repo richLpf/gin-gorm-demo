@@ -52,9 +52,18 @@ func QueryDetail(c *gin.Context) {
 	}
 }
 
-// 连表查询
+// 连表查询,定义返回结构
+type ResPassages struct {
+	models.Passages
+}
+
+/*查询表中关联的用户id, 文章列表中关联用户id*/
+/*func GetPassages(c *gin.Context) {
+	DB.MYSQLDB.Table("pasages").Select("passages.*, user.name").joins("left join user on user.user_id = passages.author_id").Scan()
+}*/
 
 // 事务查询
+/*业务复杂时，需要将*/
 
 // 查询链
 

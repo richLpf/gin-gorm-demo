@@ -10,8 +10,9 @@ import (
 
 	_ "gin-gorm-demo/docs"
 
-	"github.com/gin-gonic/gin"
 	"gin-gorm-demo/common"
+
+	"github.com/gin-gonic/gin"
 )
 
 func InitRouter() *gin.Engine {
@@ -35,7 +36,13 @@ func InitRouter() *gin.Engine {
 	admin.POST("/signin", controller.SignIn)
 
 	public := router.Group("/public")
-	public.POST("/send", common.SendToMails)
+	// 推送邮件
+	public.POST("/mail/send", common.SendToMails)
+	// ufile上传服务
+	public.POST("/upload", common.Upload)
+	// 转发企业微信服务
+	public.POST("/userinfo", common.GetQyUserInfo)
+	public.POST("/forword/:sendtype", common.SendMessage)
 
 	api := router.Group("/v1")
 	api.GET("/region/list", controller.GetRegionInfo)

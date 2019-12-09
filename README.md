@@ -20,16 +20,6 @@
 
 
 
-### golang api定义
-
-
-### 发送邮件服务
-
-- common.go
-
-
-
-
 ## api接口开发模板
 
 - 发送邮件模块
@@ -50,7 +40,12 @@
 
 # 目录结构
 
-
+- common
+    - common.go 公用函数
+    - mail.go   邮件服务
+    - qywechat.go  企业微信服务封装
+    - request.go  get请求，post请求
+    - ufile.go  ufile上传服务
 - controller  控制器
     - admin.go   登录控制
     - passages.go  文章管理

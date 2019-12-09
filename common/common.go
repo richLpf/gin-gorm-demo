@@ -9,4 +9,3 @@ func HasTable(str string) bool {
 	result := database.MYSQLDB.HasTable(str)
 	return result
 }
-
