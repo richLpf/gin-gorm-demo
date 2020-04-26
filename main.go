@@ -14,8 +14,8 @@ import (
 // @contact.url http://www.swagger.io/support
 // @contact.email support@swagger.io
 
-// @host petstore.swagger.io
-// @BasePath /web/passage
+// @host localhost:9001
+// @BasePath /
 func main() {
 	// 数据库初始化
 	database.InitMysql()

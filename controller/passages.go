@@ -47,26 +47,21 @@ func GetPassageList(c *gin.Context) {
 // @Tags 类别
 // @Accept json
 // @Produce json
-// @Param title body string true  "文章标题" "test"
-// @Param author body string  true  "作者"
-// @Param tag body  string  true  "标签"
-// @Param look body int  true  "点击数量"
-// @Param category body string  true  "类别"
-// @Param description body  string  true  "描述"
-// @Param content body string  true  "内容"
-// @Param img_link body string  true  "图片连接"
-// @Success 200 {object} models.Passages
+// @Param body body models.Passages true  "请求参数"
+// @Success 200 {int} models.Passages.ID
 // @Router /web/passage/add [post]
 func AddPassage(c *gin.Context) {
 	var passage models.Passages
-	c.BindJSON(&passage)
-	fmt.Println("passage", passage)
+	if err := c.BindJSON(&passage); err != nil {
+		c.JSON(http.StatusOK, gin.H{"code": conf.Ret_Fail, "message": err.Error()})
+		return
+	}
 	// 需要验证下标题是否存在
 	if err := DB.MYSQLDB.Create(&passage).Error; err != nil {
 		c.JSON(http.StatusOK, gin.H{"code": conf.Ret_Fail, "message": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"code": 0, "message": "success", "data": nil})
+	c.JSON(http.StatusOK, gin.H{"code": 0, "message": "success", "id": passage.ID})
 }
 
 func EditPassage(c *gin.Context) {

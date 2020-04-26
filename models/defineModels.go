@@ -11,10 +11,10 @@ import (
 * 使用gorm来自定字段属性
  */
 type Model struct {
-	ID        uint       `gorm:"primary_key;AUTO_INCREMENT" json:"id,omitempty"` // primary_key定义主键   AUTO_INCREMENT定义自增
-	CreatedAt time.Time  `json:"created_at,omitempty"`                           //omitempty 前端可以不用传入该字段，自动生成默认值，返回值如果为空，则不会返回该字段。
-	UpdatedAt time.Time  `json:"updated_at,omitempty"`
-	DeletedAt *time.Time `json:"deleted_at,omitempty"`
+	ID        uint      `gorm:"primary_key;AUTO_INCREMENT" json:"id,omitempty"` // primary_key定义主键   AUTO_INCREMENT定义自增
+	CreatedAt time.Time `swagger:"ignore" json:"created_at,omitempty"`          //omitempty 前端可以不用传入该字段，自动生成默认值，返回值如果为空，则不会返回该字段。
+	UpdatedAt time.Time `json:"updated_at,omitempty"`
+	IsDelete  uint      `swaggerignore:"true" json:"is_delete"`
 }
 
 /*定义其他公共模型*/
@@ -25,11 +25,11 @@ type ResponseModel struct {
 /*文章表结构*/
 type Passages struct {
 	Model              // 引用Model公共模型，使passages表中有ID CreatedAt  UpdatedAt  DeletedAt  字段， 不用重复写入
-	Title       string `gorm:"not null;unique;" json:"title"` // 不为空，且唯一
+	Title       string `gorm:"not null;" json:"title"` // 不为空，且唯一
 	Author      string `json:"author"`
-	Category    string `gorm:"size:255" json:"category"`            // 默认长度为255
-	Tag         string `gorm:"type:varchar(100);unique" json:"tag"` //类型为varchar  最大100 列名为 `tag`
-	LookNum     int    `json:"look,omitempty"`                      // 如果look_num的值为0  则不会返回该字段
+	Category    string `gorm:"size:255" json:"category"`      // 默认长度为255
+	Tag         string `gorm:"type:varchar(100);" json:"tag"` //类型为varchar  最大100 列名为 `tag`
+	LookNum     int    `json:"look,omitempty"`                // 如果look_num的值为0  则不会返回该字段
 	Description string `json:"description"`
 	Content     string `json:"content,omitempty"` // 如果content字段为空或默认值，将不会返回改数据
 	ImgLink     string `gorm:"-" json:"img_link"` // 忽略这个字段
@@ -78,5 +78,5 @@ type LoginToken struct {
 	CreatedAt time.Time `json:"created_at,omitempty"`
 	UpdatedAt time.Time `json:"updated_at,omitempty"`
 	ExpireAt  int64     `json:"expire_at"`
-	Valid     int       `json:"valid,omitempty"`
+	Valid     int       `json:"valid"`
 }

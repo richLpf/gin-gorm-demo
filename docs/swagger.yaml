@@ -1,3 +1,4 @@
+basePath: /
 definitions:
   models.Passages:
     properties:
@@ -12,8 +13,6 @@ definitions:
       created_at:
         description: omitempty 前端可以不用传入该字段，自动生成默认值，返回值如果为空，则不会返回该字段。
         type: string
-      deleted_at:
-        type: string
       description:
         type: string
       id:
@@ -22,6 +21,8 @@ definitions:
       img_link:
         description: 忽略这个字段
         type: string
+      is_delete:
+        type: integer
       look:
         description: 如果look_num的值为0  则不会返回该字段
         type: integer
@@ -34,9 +35,16 @@ definitions:
       updated_at:
         type: string
     type: object
+host: localhost:9001
 info:
-  contact: {}
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server Petstore server.
   license: {}
+  title: Swagger Example API
+  version: "1.0"
 paths:
   /web/passage/add:
     post:
@@ -44,61 +52,25 @@ paths:
       - application/json
       description: 添加文章接口
       parameters:
-      - description: 文章标题
+      - description: test
         in: body
-        name: title
+        name: test
         required: true
         schema:
           type: string
-      - description: 作者
+      - description: 请求参数
         in: body
-        name: author
+        name: body
         required: true
         schema:
-          type: string
-      - description: 标签
-        in: body
-        name: tag
-        required: true
-        schema:
-          type: string
-      - description: 点击数量
-        in: body
-        name: look
-        required: true
-        schema:
-          type: integer
-      - description: 类别
-        in: body
-        name: category
-        required: true
-        schema:
-          type: string
-      - description: 描述
-        in: body
-        name: description
-        required: true
-        schema:
-          type: string
-      - description: 内容
-        in: body
-        name: content
-        required: true
-        schema:
-          type: string
-      - description: 图片连接
-        in: body
-        name: img_link
-        required: true
-        schema:
-          type: string
+          $ref: '#/definitions/models.Passages'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/models.Passages'
+            type: int
       summary: 添加文章
       tags:
       - 类别

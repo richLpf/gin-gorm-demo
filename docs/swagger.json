@@ -1,9 +1,18 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {},
-        "license": {}
+        "description": "This is a sample server Petstore server.",
+        "title": "Swagger Example API",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "license": {},
+        "version": "1.0"
     },
+    "host": "localhost:9001",
+    "basePath": "/",
     "paths": {
         "/web/passage/add": {
             "post": {
@@ -20,8 +29,8 @@
                 "summary": "添加文章",
                 "parameters": [
                     {
-                        "description": "文章标题",
-                        "name": "title",
+                        "description": "test",
+                        "name": "test",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -29,66 +38,12 @@
                         }
                     },
                     {
-                        "description": "作者",
-                        "name": "author",
+                        "description": "请求参数",
+                        "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "标签",
-                        "name": "tag",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "点击数量",
-                        "name": "look",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "description": "类别",
-                        "name": "category",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "描述",
-                        "name": "description",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "内容",
-                        "name": "content",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "图片连接",
-                        "name": "img_link",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/models.Passages"
                         }
                     }
                 ],
@@ -96,7 +51,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.Passages"
+                            "type": "int"
                         }
                     }
                 }
@@ -159,9 +114,6 @@
                     "description": "omitempty 前端可以不用传入该字段，自动生成默认值，返回值如果为空，则不会返回该字段。",
                     "type": "string"
                 },
-                "deleted_at": {
-                    "type": "string"
-                },
                 "description": {
                     "type": "string"
                 },
@@ -172,6 +124,9 @@
                 "img_link": {
                     "description": "忽略这个字段",
                     "type": "string"
+                },
+                "is_delete": {
+                    "type": "integer"
                 },
                 "look": {
                     "description": "如果look_num的值为0  则不会返回该字段",
