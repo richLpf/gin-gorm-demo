@@ -35,14 +35,14 @@ func Post(url string, data interface{}, contentType string) (res interface{}, er
 	req.Header.Add("content-type", contentType)
 	req.Header.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36")
 	if err != nil {
-		panic(err)
+		return res, err
 	}
 	defer req.Body.Close()
 
 	client := &http.Client{Timeout: 10 * time.Second}
 	resp, error := client.Do(req)
 	if error != nil {
-		panic(error)
+		return res, err
 	}
 	defer resp.Body.Close()
 	result, err := ioutil.ReadAll(resp.Body)
